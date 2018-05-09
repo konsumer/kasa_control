@@ -18,14 +18,15 @@ Right now, it only has `login`, `getDevices`, `passthrough`, but eventually I wi
 ### example usage
 
 ```js
-const { login, getDevices, passthrough } = require('kasa_control')
+const KasaControl = require('kasa_control')
+const kasa = new KasaControl()
 
 const async main = () => {
-  await login('email', 'password')
-  const devices = await getDevices()
+  await kasa.login('email', 'password')
+  const devices = await kasa.getDevices()
 
   // turn off first device
-  await passthrough(devices[0].deviceId, {
+  await kasa.passthrough(devices[0].deviceId, {
     'smartlife.iot.smartbulb.lightingservice': {
       'transition_light_state': {
         'ignore_default': 1,

@@ -1,5 +1,5 @@
 /* global describe, it, expect */
-const { login, getDevices, passthrough } = require('.')
+const KasaControl = require('.')
 
 const { KASA_USER, KASA_PASS } = process.env
 
@@ -9,24 +9,26 @@ if (!KASA_USER || !KASA_PASS) {
 
 let devices
 
+const kasa = new KasaControl()
+
 // this is the index of the test device, in getDevices
 const di = 2
 
-describe('kasa_control', () => {
+describe('KasaControl', () => {
   describe('login', () => {
     it('should be able to login', async () => {
-      const info = await login(KASA_USER, KASA_PASS)
+      const info = await kasa.login(KASA_USER, KASA_PASS)
       expect(info.accountId).toBeDefined()
       expect(info.regTime).toBeDefined()
       expect(info.email).toBeDefined()
       expect(info.token).toBeDefined()
-      expect(info.terminalUUID).toBeDefined()
+      expect(info.uuid).toBeDefined()
     })
   })
 
   describe('getDevices', () => {
     it('should get a list of devices', async () => {
-      devices = await getDevices()
+      devices = await kasa.getDevices()
       expect(devices.length).toBeDefined()
     })
   })
@@ -38,12 +40,12 @@ describe('kasa_control', () => {
       if (!devices.length) {
         return console.error('No devices, skipping')
       }
-      const info = await passthrough(devices[di].deviceId, {system: {get_sysinfo: {}}})
+      const info = await kasa.passthrough(devices[di].deviceId, {system: {get_sysinfo: {}}})
       expect(info.system.get_sysinfo.alias).toBeDefined()
     })
 
     it('should be able to turn off the light', async () => {
-      await passthrough(devices[di].deviceId, {
+      await kasa.passthrough(devices[di].deviceId, {
         'smartlife.iot.smartbulb.lightingservice': {
           'transition_light_state': {
             'ignore_default': 1,
@@ -54,7 +56,7 @@ describe('kasa_control', () => {
     })
 
     it('should be able to turn on the light', async () => {
-      await passthrough(devices[di].deviceId, {
+      await kasa.passthrough(devices[di].deviceId, {
         'smartlife.iot.smartbulb.lightingservice': {
           'transition_light_state': {
             'ignore_default': 1,
