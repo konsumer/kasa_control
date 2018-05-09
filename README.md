@@ -21,14 +21,7 @@ const async main = () => {
   const devices = await kasa.getDevices()
 
   // turn off first device
-  await kasa.send(devices[0].deviceId, {
-    'smartlife.iot.smartbulb.lightingservice': {
-      'transition_light_state': {
-        'ignore_default': 1,
-        'on_off': 0
-      }
-    }
-  })
+  await kasa.power(devices[0].deviceId, true)
 }
 main()
 
