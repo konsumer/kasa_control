@@ -1,0 +1,27 @@
+{
+  "name": "kasa_control",
+  "version": "0.0.0",
+  "description": "Use kasa-cloud to hit your TPLink bulbs in nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konsumer/kasa_control.git"
+  },
+  "keywords": [],
+  "author": "David Konsumer <konsumer@jetboystudio.com> (http://konsumer.js.org/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/konsumer/kasa_control/issues"
+  },
+  "homepage": "https://github.com/konsumer/kasa_control#readme",
+  "dependencies": {
+    "node-fetch": "^2.1.2",
+    "uuid4": "^1.0.0"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3"
+  }
+}
