@@ -10,11 +10,6 @@ If you'd like to hit them directly, on your local network, use [tplink-lightbulb
 npm i kasa_control
 ```
 
-## api
-
-Right now, it only has `login`, `getDevices`, `passthrough`, but eventually I will add all the stuff in [tplink-lightbulb](https://github.com/konsumer/tplink-lightbulb), via passthroughs.
-
-
 ### example usage
 
 ```js
@@ -37,6 +32,84 @@ const async main = () => {
 }
 main()
 
+```
+
+## api
+
+<dl>
+<dt><a href="#module_send">send</a> ⇒ <code>Promise</code></dt>
+<dd><p>Send a message to a lightbulb (for RAW JS message objects)</p>
+</dd>
+<dt><a href="#module_getDevices">getDevices</a> ⇒ <code>Promise</code></dt>
+<dd><p>Get a list of devices for your Kasa account</p>
+</dd>
+<dt><a href="#module_power">power</a> ⇒ <code>Promise</code></dt>
+<dd><p>Set power-state of lightbulb</p>
+</dd>
+</dl>
+
+<a name="module_send"></a>
+
+## send ⇒ <code>Promise</code>
+Send a message to a lightbulb (for RAW JS message objects)
+
+**Returns**: <code>Promise</code> - Resolves with answer
+
+| Param | Type | Description |
+| --- | --- | --- |
+| deviceId | <code>string</code> | The deviceId of the device in your kasa app |
+| msg | <code>Object</code> | Message to send to bulb |
+
+**Example**
+```js
+kasa.send('80126E22B048C76F341BEED1A3EA8E77177F3484', {
+  'smartlife.iot.smartbulb.lightingservice': {
+    'transition_light_state': {
+      'on_off': 1,
+      'transition_period': 0
+    }
+})
+  .then(response => {
+    console.log(response)
+  })
+  .catch(e => console.error(e))
+```
+<a name="module_getDevices"></a>
+
+## getDevices ⇒ <code>Promise</code>
+Get a list of devices for your Kasa account
+
+**Returns**: <code>Promise</code> - Resolves to an array of device-objects
+**Example**
+```js
+kasa.getDevices()
+  .then(devices => {
+    console.log(devices)
+  })
+  .catch(e => console.error(e))
+```
+<a name="module_power"></a>
+
+## power ⇒ <code>Promise</code>
+Set power-state of lightbulb
+
+**Returns**: <code>Promise</code> - Resolves to output of command
+
+| Param | Type | Description |
+| --- | --- | --- |
+| deviceId | <code>string</code> | The deviceId of the device in your kasa app |
+| powerState | <code>Boolean</code> | On or off |
+| transition | <code>Number</code> | Transition to new state in this time |
+| options | <code>Object</code> | Object containing `mode`, `hue`, `saturation`, `color_temp`, `brightness` |
+
+**Example**
+```js
+// turn a light on
+kasa.power('80126E22B048C76F341BEED1A3EA8E77177F3484', true)
+  .then(status => {
+    console.log(status)
+  })
+  .catch(err => console.error(err))
 ```
 
 ## thanks

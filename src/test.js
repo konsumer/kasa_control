@@ -1,5 +1,5 @@
 /* global describe, it, expect */
-const KasaControl = require('.')
+const KasaControl = require('./lib')
 
 const { KASA_USER, KASA_PASS } = process.env
 
@@ -35,17 +35,17 @@ describe('KasaControl', () => {
 
   // These aren't really good for unit-tests, as the require working lights setup on your account
   // but they are useful for trying it out
-  describe('passthrough', () => {
+  describe('send', () => {
     it('should be able to get info from the first device on your account', async () => {
       if (!devices.length) {
         return console.error('No devices, skipping')
       }
-      const info = await kasa.passthrough(devices[di].deviceId, {system: {get_sysinfo: {}}})
+      const info = await kasa.send(devices[di].deviceId, {system: {get_sysinfo: {}}})
       expect(info.system.get_sysinfo.alias).toBeDefined()
     })
 
     it('should be able to turn off the light', async () => {
-      await kasa.passthrough(devices[di].deviceId, {
+      await kasa.send(devices[di].deviceId, {
         'smartlife.iot.smartbulb.lightingservice': {
           'transition_light_state': {
             'ignore_default': 1,
@@ -56,7 +56,7 @@ describe('KasaControl', () => {
     })
 
     it('should be able to turn on the light', async () => {
-      await kasa.passthrough(devices[di].deviceId, {
+      await kasa.send(devices[di].deviceId, {
         'smartlife.iot.smartbulb.lightingservice': {
           'transition_light_state': {
             'ignore_default': 1,

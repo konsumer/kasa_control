@@ -2,9 +2,14 @@
   "name": "kasa_control",
   "version": "0.0.2",
   "description": "Use kasa-cloud to hit your TPLink bulbs in nodejs",
-  "main": "index.js",
+  "main": "build/lib.js",
   "scripts": {
-    "test": "jest"
+    "release": "npm version patch -m 'Bumped to %s.' && npm publish",
+    "postversion": "git push && git push --tags",
+    "build": "babel src/lib.js > build/lib.js",
+    "doc": "jsdoc2md src/lib.js",
+    "prepublish": "npm run build",
+    "test": "npm run build && jest"
   },
   "repository": {
     "type": "git",
@@ -22,6 +27,16 @@
     "uuid4": "^1.0.0"
   },
   "devDependencies": {
-    "jest": "^22.4.3"
+    "babel-cli": "^6.26.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "jest": "^22.4.3",
+    "jsdoc-to-markdown": "^4.0.1"
+  },
+  "babel": {
+    "presets": [
+      "latest",
+      "stage-2"
+    ]
   }
 }
