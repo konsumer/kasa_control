@@ -21,7 +21,7 @@ const async main = () => {
   const devices = await kasa.getDevices()
 
   // turn off first device
-  await kasa.power(devices[0].deviceId, true)
+  await kasa.power(devices[0].deviceId, false)
 }
 main()
 
