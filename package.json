@@ -38,5 +38,6 @@
       "latest",
       "stage-2"
     ]
-  }
+  },
+  "files": ["build/lib.js"]
 }

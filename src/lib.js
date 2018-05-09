@@ -103,7 +103,7 @@ kasa.info('80126E22B048C76F341BEED1A3EA8E77177F3484')
 ```
    */
   info (deviceId) {
-    return this.send(deviceId, {system: {get_sysinfo: {}}})
+    return this.send(deviceId, {system: {get_sysinfo: {}}}).then(r => r.system.get_sysinfo)
   }
 
   /**
