@@ -91,6 +91,7 @@ kasa.getDevices()
 
   /**
    * Get info about a device
+   * @module info
    * @param  {string} deviceId The deviceId of the device in your kasa app
    * @return {Promise}         Resolves to an info-pbject about your device
    * example

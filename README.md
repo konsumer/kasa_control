@@ -36,6 +36,9 @@ main()
 <dt><a href="#module_getDevices">getDevices</a> ⇒ <code>Promise</code></dt>
 <dd><p>Get a list of devices for your Kasa account</p>
 </dd>
+<dt><a href="#module_info">info</a> ⇒ <code>Promise</code></dt>
+<dd><p>Get info about a device</p>
+</dd>
 <dt><a href="#module_power">power</a> ⇒ <code>Promise</code></dt>
 <dd><p>Set power-state of lightbulb</p>
 </dd>
@@ -81,6 +84,25 @@ kasa.getDevices()
   })
   .catch(e => console.error(e))
 ```
+<a name="module_info"></a>
+
+## info ⇒ <code>Promise</code>
+Get info about a device
+
+**Returns**: <code>Promise</code> - Resolves to an info-pbject about your device
+example
+```js
+kasa.info('80126E22B048C76F341BEED1A3EA8E77177F3484')
+  .then(info => {
+    console.log(info)
+  })
+  .catch(e => console.error(e))
+```
+
+| Param | Type | Description |
+| --- | --- | --- |
+| deviceId | <code>string</code> | The deviceId of the device in your kasa app |
+
 <a name="module_power"></a>
 
 ## power ⇒ <code>Promise</code>
