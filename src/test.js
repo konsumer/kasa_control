@@ -1,5 +1,6 @@
 /* global describe, it, expect */
-const KasaControl = require('./lib')
+import 'babel-polyfill'
+import KasaControl from './lib'
 
 const { KASA_USER, KASA_PASS } = process.env
 
@@ -12,7 +13,7 @@ let devices
 const kasa = new KasaControl()
 
 // this is the index of the test device, in getDevices
-const di = 2
+const di = 0
 
 describe('KasaControl', () => {
   describe('login', () => {
@@ -40,7 +41,7 @@ describe('KasaControl', () => {
       if (!devices.length) {
         return console.error('No devices, skipping')
       }
-      const info = await kasa.send(devices[di].deviceId, {system: {get_sysinfo: {}}})
+      const info = await kasa.send(devices[di].deviceId, { system: { get_sysinfo: {} } })
       expect(info.system.get_sysinfo.alias).toBeDefined()
     })
 

@@ -6,7 +6,7 @@
   "scripts": {
     "release": "npm version patch -m 'Bumped to %s.' && npm publish",
     "postversion": "git push && git push --tags",
-    "build": "babel src/lib.js > build/lib.js",
+    "build": "babel src/lib.js -o build/lib.js",
     "doc": "jsdoc2md src/lib.js",
     "prepublish": "npm run build",
     "test": "npm run build && jest"
@@ -23,20 +23,20 @@
   },
   "homepage": "https://github.com/konsumer/kasa_control#readme",
   "dependencies": {
-    "node-fetch": "^2.1.2",
-    "uuid4": "^1.0.0"
+    "node-fetch": "latest",
+    "uuid4": "latest"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-latest": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "jest": "^22.4.3",
-    "jsdoc-to-markdown": "^4.0.1"
+    "@babel/cli": "latest",
+    "@babel/preset-env": "latest",
+    "@babel/core": "latest",
+    "babel-polyfill": "latest",
+    "jest": "latest",
+    "jsdoc-to-markdown": "latest"
   },
   "babel": {
     "presets": [
-      "latest",
-      "stage-2"
+      "@babel/preset-env"
     ]
   },
   "files": [
