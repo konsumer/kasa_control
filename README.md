@@ -16,7 +16,7 @@ npm i kasa_control
 const KasaControl = require('kasa_control')
 const kasa = new KasaControl()
 
-const async main = () => {
+const main = async () => {
   await kasa.login('email', 'password')
   const devices = await kasa.getDevices()
 
