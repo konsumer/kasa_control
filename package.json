@@ -8,7 +8,7 @@
     "postversion": "git push && git push --tags",
     "build": "babel src/lib.js -o build/lib.js",
     "doc": "jsdoc2md src/lib.js",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "test": "npm run build && jest"
   },
   "repository": {
@@ -23,13 +23,13 @@
   },
   "homepage": "https://github.com/konsumer/kasa_control#readme",
   "dependencies": {
-    "node-fetch": "latest",
+    "node-fetch": "^3.0.0",
     "uuid4": "latest"
   },
   "devDependencies": {
-    "@babel/cli": "latest",
-    "@babel/preset-env": "latest",
+    "@babel/cli": "^7.15.7",
     "@babel/core": "latest",
+    "@babel/preset-env": "latest",
     "babel-polyfill": "latest",
     "jest": "latest",
     "jsdoc-to-markdown": "latest"
