@@ -1,5 +1,5 @@
-const fetch = require('node-fetch')
-const uuid4 = require('uuid4')
+import fetch from 'node-fetch'
+import uuid4 from 'uuid4'
 
 const headers = { 'content-type': 'application/json' }
 
@@ -37,7 +37,7 @@ kasa.login('email', 'password')
     if (!this.url) {
       throw new Error('You must login.')
     }
-    return fetch(this.url, {method: 'POST', headers, body: JSON.stringify({method, params})})
+    return fetch(this.url, { method: 'POST', headers, body: JSON.stringify({ method, params }) })
       .then(r => r.json())
       .then(r => {
         if (r.error_code) { throw new Error(r.msg) }
@@ -68,7 +68,7 @@ kasa.send('80126E22B048C76F341BEED1A3EA8E77177F3484', {
 ```
    */
   send (deviceId, msg) {
-    return this.kasa('passthrough', {deviceId, requestData: JSON.stringify(msg)})
+    return this.kasa('passthrough', { deviceId, requestData: JSON.stringify(msg) })
       .then(r => JSON.parse(r.responseData))
   }
 
@@ -104,7 +104,7 @@ kasa.info('80126E22B048C76F341BEED1A3EA8E77177F3484')
 ```
    */
   info (deviceId) {
-    return this.send(deviceId, {system: {get_sysinfo: {}}}).then(r => r.system.get_sysinfo)
+    return this.send(deviceId, { system: { get_sysinfo: {} } }).then(r => r.system.get_sysinfo)
   }
 
   /**
@@ -139,18 +139,18 @@ kasa.power('80126E22B048C76F341BEED1A3EA8E77177F3484', true)
         } else {
           return this.send(deviceId, {
             'smartlife.iot.smartbulb.lightingservice': {
-              'transition_light_state': {
-                'ignore_default': 1,
-                'on_off': powerState ? 1 : 0,
-                'transition_period': transition,
+              transition_light_state: {
+                ignore_default: 1,
+                on_off: powerState ? 1 : 0,
+                transition_period: transition,
                 ...options
               }
             }
           })
-          .then(r => r['smartlife.iot.smartbulb.lightingservice']['transition_light_state'])
+            .then(r => r['smartlife.iot.smartbulb.lightingservice'].transition_light_state)
         }
       })
   }
 }
 
-module.exports = KasaControl
+export default KasaControl

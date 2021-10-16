@@ -1,6 +1,5 @@
 /* global describe, it, expect */
-import 'babel-polyfill'
-import KasaControl from './lib'
+import KasaControl from './lib.js'
 
 const { KASA_USER, KASA_PASS } = process.env
 
@@ -48,9 +47,9 @@ describe('KasaControl', () => {
     it('should be able to turn off the light', async () => {
       await kasa.send(devices[di].deviceId, {
         'smartlife.iot.smartbulb.lightingservice': {
-          'transition_light_state': {
-            'ignore_default': 1,
-            'on_off': 0
+          transition_light_state: {
+            ignore_default: 1,
+            on_off: 0
           }
         }
       })
@@ -59,9 +58,9 @@ describe('KasaControl', () => {
     it('should be able to turn on the light', async () => {
       await kasa.send(devices[di].deviceId, {
         'smartlife.iot.smartbulb.lightingservice': {
-          'transition_light_state': {
-            'ignore_default': 1,
-            'on_off': 1
+          transition_light_state: {
+            ignore_default: 1,
+            on_off: 1
           }
         }
       })

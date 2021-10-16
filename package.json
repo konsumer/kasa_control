@@ -2,14 +2,13 @@
   "name": "kasa_control",
   "version": "0.1.1",
   "description": "Use kasa-cloud to hit your TPLink bulbs in nodejs",
-  "main": "build/lib.js",
   "scripts": {
     "release": "npm version patch -m 'Bumped to %s.' && npm publish",
     "postversion": "git push && git push --tags",
-    "build": "babel src/lib.js -o build/lib.js",
-    "doc": "jsdoc2md src/lib.js",
+    "build": "npx microbundle",
+    "doc": "npx jsdoc-to-markdown src/lib.js",
     "prepublishOnly": "npm run build",
-    "test": "npm run build && jest"
+    "test": "NODE_OPTIONS='--experimental-vm-modules --no-warnings' npx jest"
   },
   "repository": {
     "type": "git",
@@ -27,19 +26,22 @@
     "uuid4": "latest"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "latest",
-    "@babel/preset-env": "latest",
-    "babel-polyfill": "latest",
-    "jest": "latest",
-    "jsdoc-to-markdown": "latest"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
   },
   "files": [
-    "build/lib.js"
-  ]
+    "src/lib.js",
+    "build/kasa_control.cjs",
+    "build/kasa_control.cjs.map",
+    "build/kasa_control.modern.js",
+    "build/kasa_control.modern.js.map",
+    "build/kasa_control.module.js",
+    "build/kasa_control.module.js.map",
+    "build/kasa_control.umd.js",
+    "build/kasa_control.umd.js.map"
+  ],
+  "type": "module",
+  "source": "./src/lib.js",
+  "exports": "./build/kasa_control.modern.js",
+  "main": "./build/kasa_control.cjs",
+  "module": "./build/kasa_control.module.js",
+  "unpkg": "./build/kasa_control.umd.js"
 }
