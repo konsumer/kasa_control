@@ -1,6 +1,6 @@
 {
   "name": "kasa_control",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Use kasa-cloud to hit your TPLink bulbs in nodejs",
   "scripts": {
     "release": "npm version patch -m 'Bumped to %s.' && npm publish",
@@ -25,8 +25,7 @@
     "node-fetch": "^3.0.0",
     "uuid4": "latest"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "files": [
     "src/lib.js",
     "build/kasa_control.cjs",
